@@ -3,6 +3,7 @@ package com.example.sam.myapplication;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -15,7 +16,7 @@ public class DatabaseController extends SQLiteOpenHelper {
 
     private String TABLE_NAME = "email_items";
 
-    private String CREATE_TABLE = "CREATE TABLE if not exists " + TABLE_NAME + " ( Email_Id TEXT PRIMARY KEY, Passwd TEXT)";
+    private String CREATE_TABLE = "CREATE TABLE if not exists " + TABLE_NAME + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, Email_Id TEXT, Passwd TEXT)";
 
     private String SELECT = "SELECT * FROM " + TABLE_NAME;
 
@@ -74,7 +75,23 @@ public class DatabaseController extends SQLiteOpenHelper {
         return -1;
     }
 
+    public Cursor getData() throws SQLException{
+        Log.d("saurabh","DatabaseController getData()" );
+        Cursor cursor = null;
+        database = this.getWritableDatabase();
 
+        try {
+            cursor = database.rawQuery(SELECT, null);
+        } catch(Exception e) {
+            Log.d("saurabh", "exception e " + e);
+        }
 
+        Log.d("saurabh","DatabaseController getData() cursor = " + cursor );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
 
 }

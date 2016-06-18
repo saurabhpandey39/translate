@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Intent intent = new Intent(this, ListItemView.class);
         startActivity(intent);
 
-        Toast.makeText(LoginActivity.this, " going to list item ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(LoginActivity.this, " going to list item ", Toast.LENGTH_SHORT).show();
     }
 
 
